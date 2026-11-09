@@ -19,7 +19,7 @@ Most work goes wrong before it starts: the ask is the size of the task, not the 
 
 ## 2. Pin the outcome
 
-Use the AskUserQuestion tool whenever a person is there, recommended answer first in every question. **First question, every time: "How deep should this go?"**
+Use the AskUserQuestion tool whenever a person is there, recommended answer first in every question. A recommended option never contradicts or narrows something the user has already said. **First question, every time: "How deep should this go?"** It goes in the same round as the first outcome questions.
 
 | Option | What it buys |
 |---|---|
@@ -27,13 +27,13 @@ Use the AskUserQuestion tool whenever a person is there, recommended answer firs
 | Standard | One question round, a check against the criteria before hand-over |
 | Deep (tokens are fine) | Rounds until the outcome is clear, a pre-mortem and second-model red team, a full run plan |
 
-Recommend Deep in plan mode and Standard otherwise. The user's answer governs everything after it.
+Recommend Deep in plan mode and Standard otherwise. The user's answer governs everything after it. Quick skips steps 3, 4 and 10, keeps the spec to a line or two, and pulls only the sources the task needs.
 
 Then ask about the outcome, not the task. Skip anything the context already answers.
 
 - **Quick or Standard:** one round, up to 4 questions. Good ones: what happens after this is done, who uses it and for what decision, what would make it a clear win, what's off limits.
 - **Deep:** keep going a level deeper each round ("and what does that get you?"). Follow `references/deep-outcome.md`. Stop at 5 rounds, or sooner when the next decision is clear, the outcome has a number that matters, or the user says go.
-- **Play back the key decisions** in one short list and get an explicit yes before building on them.
+- **Play back the key decisions** in one short list. Deep: as its own question, with an explicit yes before building. Quick or Standard: in your reply before you start, and carry on unless the user stops you.
 - **When the goal is understanding something**, ask how they want it shown: text, a diagram, an HTML page or a short explainer video. A picture is often faster to take in than a thousand words. Use the tools the project has for each. Without one, use a text diagram and say what's missing.
 
 ## 3. Find the bar
@@ -69,13 +69,13 @@ When the output is a prompt for Claude or another model, write it with `referenc
 
 ## 6. Set the check
 
-Write the pass criteria before any work starts.
+Write the pass criteria before the task is carried out (drafting the spec comes first).
 
 - If step 3 found a gold example, at least one criterion points at it.
 - Each criterion names evidence the worker can actually get: a test run, tool output, the live system, a quote from the source, a past example to match.
 - Never pass work on its own say-so. A second model is an opinion, not proof.
 - Where it's unclear a model or tool can do the job, build a small test of that exact skill first. Your own probe beats a public benchmark.
-- Record the result against each criterion, misses included. A missed hard target with honest numbers is a good result. A faked pass is not. If the evidence needs access nobody has, name what's missing and what it would make possible.
+- When the task is carried out, record the result against each criterion, misses included. A missed hard target with honest numbers is a good result. A faked pass is not. If the evidence needs access nobody has, name what's missing and what it would make possible.
 
 ## 7. Second opinion and routing
 
@@ -84,6 +84,8 @@ Write the pass criteria before any work starts.
 | Quick | None |
 | Standard | Check the work against the criteria before handing it over. This is a criteria check, not an independent review |
 | Deep | A different model red-teams the plan or spec before work starts. Follow the project's routing rules for which model. If none is available, run the red team in a fresh subagent where the project allows one, otherwise yourself, and say no second model was used |
+
+If the interview ran a case test, give the red team those cases. If it finds a clash in the core rule or the outcome itself, take it back to the user before building, even after an approved playback.
 
 ## 8. Pick the run shape
 
@@ -119,6 +121,8 @@ Pick from `references/thinking-commands.md`.
 The job will come back: suggest saving it as a skill or memory, and save the spec, criteria and gold example as a bench case where the project keeps its test cases. A rule can never be broken: suggest a hook, not a CLAUDE.md line.
 
 ## 11. Deliver what was asked
+
+**Before the task is carried out, the user has seen** the outcome and the pass criteria, plus the run shape unless it's a single pass. If one is missing, add it first. Unattended runs write them at the top of the output instead.
 
 | Asked for | Deliver |
 |---|---|

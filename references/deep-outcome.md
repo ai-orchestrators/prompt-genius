@@ -34,7 +34,9 @@ The rewritten spec aims at the highest rung the person confirms, and the check m
 
 ## Stop rules
 
-Stop at the first that fires:
+**Case test (only when the outcome is a rule that sorts or routes things: who gets what, which option wins, what goes where).** Before stopping, run the rule on two contrasting real cases it should handle differently. If it gives an odd answer, can't decide, or the user corrects it, ask one more round on that point, within the 5-round cap and unless the user has said go.
+
+Then stop at the first that fires:
 
 - 5 rounds done.
 - The next decision is clear.
@@ -49,6 +51,7 @@ Before building, show:
 - The outcome in one sentence.
 - The number and date that show it worked, or "no measure yet" and what would create one.
 - The key decisions made in the interview.
+- If a case test ran: the two cases and how the rule handles each. If it was skipped because the user said go or the cap hit, say so.
 - The assumptions still open.
 
 Ask for an explicit yes. If they change anything, update the sentence, not just the plan.

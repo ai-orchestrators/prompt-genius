@@ -22,6 +22,7 @@ prompt-genius fixes that in order:
 | **"How deep should this go?"** | Asked first whenever a person is there to answer. Quick, Standard or Deep. Your answer sets how many questions, whether a second model red-teams the plan, and how the run is shaped |
 | **Plan-mode aware** | In Claude Code's plan mode it recommends Deep and always plans how the work will run. Pick Deep and it keeps interviewing, round by round, until the outcome is clear (5 rounds max) |
 | **Doesn't wait on questions unattended** | In a headless run, scheduled task or subagent it asks nothing and skips its own play-backs. It keeps the outcome exactly as asked and writes its assumptions down. Your project's approval rules still apply, and missing access is reported, not guessed around |
+| **Tests the rule before building** | When the outcome is a rule that sorts or routes things (who gets what, which option wins), Deep runs it on two contrasting real cases before the interview stops. A clash the red team finds goes back to you before anything is built |
 | **Evidence-based checks** | Each pass criterion names a test run, tool output, live system, source quote or past example. A second model's opinion is not proof |
 | **Delivers what you asked for** | Asked for a plan, you get a plan and it stops. Asked for a prompt, you get the prompt. Asked for a task, it does the work |
 | **Visual explanations** | When the goal is understanding, it asks whether you want text, a diagram, an HTML page or an explainer video |
@@ -93,13 +94,12 @@ You type:
 
 You get, in order:
 
-1. **How deep should this go?** You pick Standard.
-2. **One round of up to 4 questions:** what happens after an invoice is viewed, who uses the page and for what decision, what would make it a clear win, what's off limits.
-3. **The outcome in one line**, played back for your yes: "Clients pay from the invoice page without emailing support."
-4. **The bar:** the closest existing page in your codebase to match.
-5. **The spec** in small checkpoints, each reviewable.
-6. **The check**, for example: "pass = the end-to-end payment test against staging prints 0 failures, and the page passes the accessibility check".
-7. **The run shape:** a goal loop with a turn limit, because Claude prints the test results each turn, so done is something the conversation itself shows.
+1. **One round of up to 4 questions**, starting with "How deep should this go?" (you pick Standard), then what happens after an invoice is viewed, who uses the page and for what decision, and what would make it a clear win.
+2. **The outcome in one line**, played back before it starts: "Clients pay from the invoice page without emailing support." At Standard it carries on unless you stop it; at Deep it waits for your yes.
+3. **The bar:** the closest existing page in your codebase to match.
+4. **The spec** in small checkpoints, each reviewable.
+5. **The check**, for example: "pass = the end-to-end payment test against staging prints 0 failures, and the page passes the accessibility check".
+6. **The run shape:** a goal loop with a turn limit, because Claude prints the test results each turn, so done is something the conversation itself shows.
 
 ## Make it yours
 
