@@ -103,16 +103,16 @@ You get, in order:
 
 ## Make it yours
 
-Everything in the skill follows your project's own `CLAUDE.md` on models, agents, routing and approvals.
+Everything in the skill follows your project's own `CLAUDE.md` on models, agents, routing and approvals. Unattended runs are stricter: anything hard to reverse, or that reaches a person, stops and is reported for a person to approve.
 
-To give it your own routing (which model reviews, which tools make diagrams or videos, which skills to prefer), add a file at `references/local-routing.md`. The skill reads it before the second-opinion and run-shape steps. Leave it out and the skill falls back to your project's rules.
+To give it your own setup (where your prompting guidance lives, which model reviews, which tools make diagrams or videos, which skills to prefer), add a file at `references/local-routing.md`. The skill reads it before step 1. Leave it out and the skill falls back to your project's rules.
 
 ## Requirements
 
 - Claude Code, current release. Uses the AskUserQuestion tool, and optionally `/goal`, `/loop` and subagents.
 - `/goal` needs hooks enabled.
 - The skill itself ships no scripts, makes no network calls and has no dependencies.
-- Optional, from your own setup: a second model or reviewer for Deep-depth red teams, and diagram, HTML or video tools for visual explanations. Without them the skill says what's missing and falls back: a text diagram instead of a visual, and a red team run in a fresh subagent instead of by a second model, labelled as such.
+- Optional, from your own setup: a second model or reviewer for Deep-depth red teams, and diagram, HTML or video tools for visual explanations. Without them the skill says what's missing and falls back: a text diagram instead of a visual, and a red team run in a fresh subagent (where your project allows one) or by Claude itself instead of by a second model, labelled as such.
 
 ## License
 

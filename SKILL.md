@@ -7,7 +7,7 @@ description: Sharpen this, what's the real goal, make this prompt better, write 
 
 Most work goes wrong before it starts: the ask is the size of the task, not the size of the outcome, and nobody said what done looks like. This skill fixes the ask first, then the spec, then the check, then how it runs.
 
-The project's own CLAUDE.md wins on models, agents, routing and approvals. If you add your own `references/local-routing.md` (your models, reviewers and tools), read it before step 7.
+**Principles first.** Before creating or changing a prompt for a model, read the project's own prompting guidance if it has any. If you add your own `references/local-routing.md` (your prompting guidance, models, reviewers and tools), it names where. For an OpenAI model: developer message for rules, Markdown sections with XML around content, zero-shot first on reasoning models, effort set in the call not the prose. The project's own CLAUDE.md wins on models, agents, routing and approvals. If `references/local-routing.md` exists, read it before step 1.
 
 ## 1. Read the mode
 
@@ -19,13 +19,11 @@ The project's own CLAUDE.md wins on models, agents, routing and approvals. If yo
 
 ## 2. Pin the outcome
 
-Use the AskUserQuestion tool whenever a person is there. Put your recommended answer first in every question.
-
-**First question, every time: "How deep should this go?"**
+Use the AskUserQuestion tool whenever a person is there, recommended answer first in every question. **First question, every time: "How deep should this go?"**
 
 | Option | What it buys |
 |---|---|
-| Quick | One question round, no second opinion, one-line run shape |
+| Quick | One question round, no second opinion, single pass |
 | Standard | One question round, a check against the criteria before hand-over |
 | Deep (tokens are fine) | Rounds until the outcome is clear, a pre-mortem and second-model red team, a full run plan |
 
@@ -43,8 +41,7 @@ Then ask about the outcome, not the task. Skip anything the context already answ
 Before writing the spec, find one gold example of good: the user's own past version, an approved output (a sent email, a published post, a merged change), or a page in the project's knowledge base. Past decisions, meeting notes and the code are the places to look.
 
 - Found one: the pass criteria reference it ("matches the example on X and Y").
-- None found and the job will recur: recommend the user does it once by hand first. That run becomes the example.
-- None found and the job is one-off: say so and set criteria without it.
+- None found: if the job will recur, recommend the user does it once by hand first (that run becomes the example). If it is one-off, say so and set criteria without it.
 
 ## 4. Raise the ask
 
@@ -78,8 +75,7 @@ Write the pass criteria before any work starts.
 - Each criterion names evidence the worker can actually get: a test run, tool output, the live system, a quote from the source, a past example to match.
 - Never pass work on its own say-so. A second model is an opinion, not proof.
 - Where it's unclear a model or tool can do the job, build a small test of that exact skill first. Your own probe beats a public benchmark.
-- Record the result against each criterion, misses included. A missed hard target with honest numbers is a good result. A faked pass is not.
-- If the evidence needs access nobody has, name what's missing and what it would make possible.
+- Record the result against each criterion, misses included. A missed hard target with honest numbers is a good result. A faked pass is not. If the evidence needs access nobody has, name what's missing and what it would make possible.
 
 ## 7. Second opinion and routing
 
@@ -87,7 +83,7 @@ Write the pass criteria before any work starts.
 |---|---|
 | Quick | None |
 | Standard | Check the work against the criteria before handing it over. This is a criteria check, not an independent review |
-| Deep | A different model red-teams the plan or spec before work starts. Follow the project's routing rules for which model. If none is available, run the red team in a fresh subagent and say no second model was used |
+| Deep | A different model red-teams the plan or spec before work starts. Follow the project's routing rules for which model. If none is available, run the red team in a fresh subagent where the project allows one, otherwise yourself, and say no second model was used |
 
 ## 8. Pick the run shape
 
@@ -104,9 +100,7 @@ Quick or Standard: one line, only when it isn't a single pass. Deep or plan mode
 | An existing skill or agent already does the job | Name it and call it |
 | Anything else | Single pass |
 
-Every worker (subagent, background session, loop run) gets a model line in its brief. Name a model only when the work clearly calls for one. Otherwise the project's routing rules decide, and when unsure the worker keeps the session's own model. Never downgrade by default. Generic tiers: fast cheap model for lookups and file reads, everyday model for routine builds and research synthesis, top model for judgement, plans and architecture.
-
-Deep depth means token spend is accepted. Limits are still stated.
+Every worker (subagent, background session, loop run) gets a model line in its brief, set by "Model per worker" in `references/run-shapes.md`. Never downgrade by default. Deep depth accepts token spend; limits are still stated.
 
 ## 9. Stress-test the thinking
 
@@ -122,8 +116,7 @@ Pick from `references/thinking-commands.md`.
 
 ## 10. Make it repeatable (one line, only if it applies)
 
-- The job will come back: suggest saving it as a skill or memory, and save the spec, criteria and gold example as a bench case where the project keeps its test cases.
-- A rule can never be broken: suggest a hook, not a CLAUDE.md line.
+The job will come back: suggest saving it as a skill or memory, and save the spec, criteria and gold example as a bench case where the project keeps its test cases. A rule can never be broken: suggest a hook, not a CLAUDE.md line.
 
 ## 11. Deliver what was asked
 

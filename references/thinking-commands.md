@@ -49,7 +49,7 @@ Attack the work from every angle a sceptic would use.
 
 Prompt: "Red team [plan/pitch/spec]. Attack it as a sceptical customer, a competitor, a short seller, an auditor and the person who has to build it. Rank the weaknesses by how much damage they'd do. For each: why it matters and the fix."
 
-Hand back: ranked weaknesses with fixes, then the 3 changes that matter most. At Deep depth, run it with a different model where the project's routing allows, otherwise in a fresh subagent, and say which.
+Hand back: ranked weaknesses with fixes, then the 3 changes that matter most. At Deep depth, run it with a different model where the project's routing allows, otherwise in a fresh subagent where the project allows one, otherwise yourself, and say which.
 
 ## First principles
 

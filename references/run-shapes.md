@@ -69,7 +69,7 @@ Before building a method from scratch, check what the project already has. If a 
 
 ## Model per worker
 
-Every worker's brief names a model line. Name a model only when the work clearly calls for one. Otherwise the project's routing rules decide, and when unsure the worker keeps the session's own model. Never downgrade by default.
+Every worker's brief names a model line. Name a model only when the work clearly calls for one. Otherwise the project's routing rules decide, and when they are unsure the worker keeps the session's own model. Never downgrade by default.
 
 | Work | Tier |
 |---|---|
